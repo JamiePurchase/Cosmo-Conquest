@@ -28,6 +28,7 @@ public class Board
     
     // Scenery
     private ArrayList<Scenery> scenery;
+    private Scenery sceneryTarget;
     
     // Interface
     private DisplayCharacter uiCharacter;
@@ -49,11 +50,17 @@ public class Board
         this.setTerrainAll("grass2");
 
         // Units
-        this.player = new Unit("PLAYER", "Gomran", 10, 4, 0, "CUBE", "Gomran", 0);
+        //this.player = new Unit(this, "PLAYER", "Gomran", 10, 4, 0, "CUBE", new Tileset(Drawing.getImage("unit/chGomran.png"), 32, 32, 3, 4), false, 0);
+        this.player = new Unit(this, "PLAYER", "Tungstan", 10, 4, 0, "CUBE", new Tileset(Drawing.getImage("unit/veTungstanBodyMuslowt.png"), 96, 96, 2, 8), true, 0);
         
         // Scenery
         this.scenery = new ArrayList<Scenery>();
-        this.addScenery(new Scenery("tree"), 6, 4);
+        this.addScenery(new Scenery("treeA"), 6, 4);
+        this.addScenery(new Scenery("treeA"), 28, 3);
+        this.addScenery(new Scenery("treeB"), 22, 5);
+        this.addScenery(new Scenery("treeC"), 8, 14);
+        this.addScenery(new Scenery("treeC"), 16, 18);
+        this.sceneryTarget = null;
         
         // Interface
         this.uiCharacter = new DisplayCharacter();
@@ -65,6 +72,27 @@ public class Board
     {
         scenery.setTilePosition(posX, posY);
         this.scenery.add(scenery);
+    }
+    
+    public boolean getScenery(int posX, int posY)
+    {
+        this.sceneryTarget = null;
+        for(int s = 0; s < this.scenery.size(); s++)
+        {
+            if(this.scenery.get(s).getTilePosX() == posX && this.scenery.get(s).getTilePosY() == posY)
+            {
+                this.sceneryTarget = this.scenery.get(s);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Scenery getSceneryFound()
+    {
+        Scenery scenery = this.sceneryTarget;
+        this.sceneryTarget = null;
+        return scenery;
     }
     
     private Image getTerrainBackground()

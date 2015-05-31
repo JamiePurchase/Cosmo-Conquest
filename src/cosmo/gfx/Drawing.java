@@ -51,7 +51,7 @@ public class Drawing
 
     public static void fadeScreen(Graphics gfx)
     {
-        Drawing.drawImageOpaque(gfx, getImage("system/fadeBlack.png"), 0, 0, 0.75f);
+        Drawing.drawImageOpaque(gfx, getImage("interface/fadeBlack.png"), 0, 0, 0.75f);
     }
 
     public static void fillScreen(Graphics gfx)
